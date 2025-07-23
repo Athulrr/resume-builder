@@ -280,19 +280,25 @@ body, html {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 1.5rem;
+  gap: 1.2rem; /* reduced gap for better balance */
   margin-bottom: 0.2rem;
 }
 .resume-left {
-  flex: 2;
-  min-width: 0;
+  flex: 2 1 250px;
+  min-width: 180px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 .resume-right {
-  flex: 1;
+  flex: 1 0 120px;
   min-width: 120px;
   text-align: right;
   font-size: 0.98rem;
   color: #444;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  flex-shrink: 0;
 }
 .resume-italic {
   font-style: italic;
@@ -312,7 +318,7 @@ body, html {
 }
 .resume-skills-table {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.3rem 1.2rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -367,13 +373,21 @@ body, html {
     gap: 1.5rem;
     background: var(--primary-bg);
   }
-  .resume-form, .resume-preview {
-    max-width: 100%;
-    min-width: 0;
+  .resume-form {
+    order: 1;
+    margin-bottom: 1.5rem;
   }
   .resume-preview {
+    order: 3;
     padding: 1rem 0.5rem;
     max-width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  .pdf-btn {
+    order: 2;
+    display: block;
+    width: 100%;
+    margin: 0 0 1rem 0;
   }
   .resume-row {
     flex-direction: column;

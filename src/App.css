@@ -402,3 +402,54 @@ body, html {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+@media print {
+  body, html {
+    background: #fff !important;
+    color: #222 !important;
+  }
+  .builder-layout, .resume-preview {
+    background: #fff !important;
+    color: #222 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+  .resume-preview {
+    padding: 0.5in 0.7in !important;
+    font-size: 1rem !important;
+    border-radius: 0 !important;
+  }
+  .resume-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 1.2rem !important;
+    margin-bottom: 0.2rem !important;
+    page-break-inside: avoid;
+  }
+  .resume-left {
+    flex: 2 1 250px !important;
+    min-width: 180px !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+  }
+  .resume-right {
+    flex: 1 0 120px !important;
+    min-width: 120px !important;
+    text-align: right !important;
+    font-size: 0.98rem !important;
+    color: #444 !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    flex-shrink: 0 !important;
+  }
+  .resume-skills-table {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+  .pdf-btn, .resume-form, .add-btn, .ai-btn, .use-btn, .example-btn {
+    display: none !important;
+  }
+}

@@ -8,7 +8,7 @@ function LandingPage() {
   return (
     <div className="landing-page">
       <h1>Resume Builder</h1>
-      <p>Create a job-winning resume in minutes</p>
+      
       <button onClick={() => navigate('/builder')}>Start Building</button>
     </div>
   );

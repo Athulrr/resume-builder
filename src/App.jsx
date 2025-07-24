@@ -28,70 +28,111 @@ const initialForm = {
 
 const exampleForm = {
   personal: {
-    name: 'Jane Doe',
-    email: 'jane.doe@email.com',
-    phone: '+1 234 567 8901',
-    linkedin: 'linkedin.com/in/janedoe',
-    portfolio: 'janedoe.dev',
+    name: 'Athul Raj R',
+    email: 'athul3210rajr@gmail.com',
+    phone: '8590664361',
+    linkedin: 'athull-r',
+    portfolio: '',
   },
-  summary: 'Results-driven software engineer with 5+ years of experience building scalable web applications.',
+  summary: 'Curious and adaptive individual with a passion for exploration and continuous learning. A quick learner eager to embrace new challenges and contribute to innovative solutions.',
   education: [
     {
-      institute: 'State University',
-      degree: 'B.Sc. Computer Science',
-      city: 'New York',
-      state: 'NY',
-      gpa: '3.8',
-      start: 'Aug 2015',
-      end: 'May 2019'
+      institute: 'AWH Engineering College',
+      degree: 'Btech CSE',
+      city: 'Calicut',
+      state: '',
+      gpa: '7.6',
+      start: '2021',
+      end: '2025'
+    },
+    {
+      institute: 'Kendriya Vidyalaya No 1',
+      degree: '12th CSE',
+      city: 'Calicut',
+      state: '',
+      gpa: '80%',
+      start: '2020',
+      end: '2021'
     }
   ],
   experience: [
     {
-      company: 'Tech Corp',
-      role: 'Frontend Developer',
-      city: 'San Francisco',
-      state: 'CA',
-      start: 'Jun 2019',
-      end: 'Present',
+      company: 'Exult',
+      role: 'QA Intern',
+      city: '',
+      state: '',
+      start: 'May 2025',
+      end: 'Aug 2025',
       bullets: [
-        'Developed and maintained web applications using React and TypeScript.',
-        'Collaborated with designers and backend developers to deliver high-quality products.',
-        'Improved application performance by 30% through code optimization.'
+        'Learned testing and test case writing methodologies, contributing to improved project quality.'
+      ]
+    },
+    {
+      company: 'ICT Academy',
+      role: 'MERN Developer',
+      city: '',
+      state: '',
+      start: 'Sept 2024',
+      end: 'Nov 2024',
+      bullets: [
+        'Learned MERN stack basics and completed a full-stack project.'
       ]
     }
   ],
   projects: [
     {
-      name: 'Portfolio Website',
+      name: 'Lets Go!',
       course: '',
       city: '',
       state: '',
-      start: 'Jan 2022',
-      end: 'Mar 2022',
+      start: '',
+      end: '',
       bullets: [
-        'Built a personal website to showcase projects and blogs.',
-        'Implemented responsive design using CSS Grid and Flexbox.'
+        'Dedicated social media platform for travel and nature lovers , platform to host green camps'
+      ]
+    },
+    {
+      name: 'Resume4me',
+      course: '',
+      city: '',
+      state: '',
+      start: '',
+      end: '',
+      bullets: [
+        'A free, beginner-friendly platform to easily create ATS-friendly resumes.'
+      ]
+    },
+    {
+      name: 'Ruse',
+      course: '',
+      city: '',
+      state: '',
+      start: '',
+      end: '',
+      bullets: [
+        'An AI-powered web game where players investigate by interacting with roleplaying characters.'
       ]
     }
   ],
   involvement: [
     {
-      title: 'President',
-      org: 'Coding Club',
-      start: 'Sep 2017',
-      end: 'May 2019',
-      bullets: [
-        'Organized weekly coding challenges and workshops.',
-        'Increased club membership by 50%.'
-      ]
+      title: 'Chairperson',
+      org: '',
+      start: '2022',
+      end: '2023',
+      bullets: []
+    },
+    {
+      title: 'Event Coordinator',
+      org: 'NSS',
+      start: '2022',
+      end: '2024',
+      bullets: []
     }
   ],
-  skills: 'JavaScript, React, CSS, HTML, Git',
-  honors: [
-    { name: 'AWS Certified Developer', date: '2021' }
-  ],
-  certifications: 'AWS Certified Developer'
+  skills: 'Python, HTML, CSS, Js, React, Git, Java, C',
+  honors: [],
+  certifications: ''
 };
 
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
@@ -158,7 +199,7 @@ function ResumeBuilder() {
     const element = document.getElementById('resume-preview');
     if (element) {
       html2pdf().from(element).set({
-        margin: 0.5,
+        margin: 0,
         filename: `${form.personal.name || 'resume'}.pdf`,
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
@@ -359,6 +400,9 @@ function ResumeBuilder() {
 
   return (
     <div className="builder-layout">
+      <div style={{ width: '100%' }}>
+        <button type="button" className="example-btn" onClick={fillExample} style={{marginBottom: '1rem'}}>Fill it</button>
+      </div>
       <form className="resume-form" onSubmit={e => e.preventDefault()}>
         <h2>Personal Info</h2>
         <div className="helper-text">Fill in your contact details as they should appear on your resume.</div>

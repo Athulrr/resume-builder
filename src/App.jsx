@@ -256,7 +256,14 @@ function ResumeBuilder() {
   const renderPreview = () => (
     <div className="resume-preview" id="resume-preview">
       <div className="resume-header">
-        <div className="resume-name">{form.personal.name || ''}</div>
+        <div
+          className="resume-name"
+          contentEditable
+          suppressContentEditableWarning
+          onBlur={e => handleChange('personal', 'name', e.target.innerText)}
+        >
+          {form.personal.name || ''}
+        </div>
         <div className="resume-contact">
           {[form.personal.email, form.personal.phone, form.personal.portfolio]
             .filter(Boolean)
@@ -273,7 +280,13 @@ function ResumeBuilder() {
       {form.summary && (
         <div className="resume-section">
           <div className="resume-section-title">SUMMARY</div>
-          <div>{form.summary}</div>
+          <div
+            contentEditable
+            suppressContentEditableWarning
+            onBlur={e => handleChange('summary', null, e.target.innerText)}
+          >
+            {form.summary}
+          </div>
         </div>
       )}
       {/* EDUCATION */}
@@ -284,13 +297,46 @@ function ResumeBuilder() {
             (ed.institute || ed.degree || ed.city || ed.state || ed.gpa || ed.start || ed.end) && (
               <div className="resume-row" key={i}>
                 <div className="resume-left">
-                  <b>{ed.institute}</b>{ed.institute && ed.degree && ', '}
-                  <span className="resume-italic">{ed.degree}</span><br/>
-                  {(ed.city || ed.state) && <span className="resume-light">{ed.city}{ed.city && ed.state && ', '}{ed.state}</span>}<br/>
+                  <b
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('education', 'institute', e.target.innerText, i)}
+                  >{ed.institute}</b>{ed.institute && ed.degree && ', '}
+                  <span
+                    className="resume-italic"
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('education', 'degree', e.target.innerText, i)}
+                  >{ed.degree}</span><br/>
+                  {(ed.city || ed.state) && <span
+                    className="resume-light"
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('education', 'city', e.target.innerText, i)}
+                  >{ed.city}</span>}{ed.city && ed.state && ', '}
+                  <span
+                    className="resume-light"
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('education', 'state', e.target.innerText, i)}
+                  >{ed.state}</span><br/>
                 </div>
                 <div className="resume-right">
-                  <span>{ed.start}{ed.start && ed.end && ' - '}{ed.end}</span><br/>
-                  {ed.gpa && <span>GPA: {ed.gpa}</span>}
+                  <span
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('education', 'start', e.target.innerText, i)}
+                  >{ed.start}</span>{ed.start && ed.end && ' - '}
+                  <span
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('education', 'end', e.target.innerText, i)}
+                  >{ed.end}</span><br/>
+                  {ed.gpa && <span
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('education', 'gpa', e.target.innerText, i)}
+                  >GPA: {ed.gpa}</span>}
                 </div>
               </div>
             )
@@ -305,16 +351,52 @@ function ResumeBuilder() {
             (ex.company || ex.role || ex.city || ex.state || ex.start || ex.end || (ex.bullets && ex.bullets.some(b => b))) && (
               <div className="resume-row" key={i}>
                 <div className="resume-left">
-                  <b>{ex.company}</b>{ex.company && ex.role && ', '}
-                  <span className="resume-italic">{ex.role}</span><br/>
-                  {(ex.city || ex.state) && <span className="resume-light">{ex.city}{ex.city && ex.state && ', '}{ex.state}</span>}
+                  <b
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('experience', 'company', e.target.innerText, i)}
+                  >{ex.company}</b>{ex.company && ex.role && ', '}
+                  <span
+                    className="resume-italic"
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('experience', 'role', e.target.innerText, i)}
+                  >{ex.role}</span><br/>
+                  {(ex.city || ex.state) && <span
+                    className="resume-light"
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('experience', 'city', e.target.innerText, i)}
+                  >{ex.city}</span>}{ex.city && ex.state && ', '}
+                  <span
+                    className="resume-light"
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('experience', 'state', e.target.innerText, i)}
+                  >{ex.state}</span>
                 </div>
                 <div className="resume-right">
-                  <span>{ex.start}{ex.start && ex.end && ' - '}{ex.end}</span>
+                  <span
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('experience', 'start', e.target.innerText, i)}
+                  >{ex.start}</span>{ex.start && ex.end && ' - '}
+                  <span
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('experience', 'end', e.target.innerText, i)}
+                  >{ex.end}</span>
                 </div>
                 {ex.bullets && ex.bullets.filter(b => b).length > 0 && (
                   <ul className="resume-bullets">
-                    {ex.bullets.filter(b => b).map((b, j) => <li key={j}>{b}</li>)}
+                    {ex.bullets.filter(b => b).map((b, j) => (
+                      <li
+                        key={j}
+                        contentEditable
+                        suppressContentEditableWarning
+                        onBlur={e => handleChange('experience', 'bullets', e.target.innerText, i, j)}
+                      >{b}</li>
+                    ))}
                   </ul>
                 )}
               </div>
@@ -330,16 +412,52 @@ function ResumeBuilder() {
             (pr.name || pr.course || pr.city || pr.state || pr.start || pr.end || (pr.bullets && pr.bullets.some(b => b))) && (
               <div className="resume-row" key={i}>
                 <div className="resume-left">
-                  <b>{pr.name}</b>{pr.name && pr.course && ', '}
-                  <span className="resume-italic">{pr.course}</span><br/>
-                  {(pr.city || pr.state) && <span className="resume-light">{pr.city}{pr.city && pr.state && ', '}{pr.state}</span>}
+                  <b
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('projects', 'name', e.target.innerText, i)}
+                  >{pr.name}</b>{pr.name && pr.course && ', '}
+                  <span
+                    className="resume-italic"
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('projects', 'course', e.target.innerText, i)}
+                  >{pr.course}</span><br/>
+                  {(pr.city || pr.state) && <span
+                    className="resume-light"
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('projects', 'city', e.target.innerText, i)}
+                  >{pr.city}</span>}{pr.city && pr.state && ', '}
+                  <span
+                    className="resume-light"
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('projects', 'state', e.target.innerText, i)}
+                  >{pr.state}</span>
                 </div>
                 <div className="resume-right">
-                  <span>{pr.start}{pr.start && pr.end && ' - '}{pr.end}</span>
+                  <span
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('projects', 'start', e.target.innerText, i)}
+                  >{pr.start}</span>{pr.start && pr.end && ' - '}
+                  <span
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('projects', 'end', e.target.innerText, i)}
+                  >{pr.end}</span>
                 </div>
                 {pr.bullets && pr.bullets.filter(b => b).length > 0 && (
                   <ul className="resume-bullets">
-                    {pr.bullets.filter(b => b).map((b, j) => <li key={j}>{b}</li>)}
+                    {pr.bullets.filter(b => b).map((b, j) => (
+                      <li
+                        key={j}
+                        contentEditable
+                        suppressContentEditableWarning
+                        onBlur={e => handleChange('projects', 'bullets', e.target.innerText, i, j)}
+                      >{b}</li>
+                    ))}
                   </ul>
                 )}
               </div>
@@ -355,14 +473,39 @@ function ResumeBuilder() {
             (iv.title || iv.org || iv.start || iv.end || (iv.bullets && iv.bullets.some(b => b))) && (
               <div className="resume-row" key={i}>
                 <div className="resume-left">
-                  <b>{iv.title}</b>{iv.title && iv.org && ', '}{iv.org}
+                  <b
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('involvement', 'title', e.target.innerText, i)}
+                  >{iv.title}</b>{iv.title && iv.org && ', '}
+                  <span
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('involvement', 'org', e.target.innerText, i)}
+                  >{iv.org}</span>
                 </div>
                 <div className="resume-right">
-                  <span>{iv.start}{iv.start && iv.end && ' - '}{iv.end}</span>
+                  <span
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('involvement', 'start', e.target.innerText, i)}
+                  >{iv.start}</span>{iv.start && iv.end && ' - '}
+                  <span
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={e => handleChange('involvement', 'end', e.target.innerText, i)}
+                  >{iv.end}</span>
                 </div>
                 {iv.bullets && iv.bullets.filter(b => b).length > 0 && (
                   <ul className="resume-bullets">
-                    {iv.bullets.filter(b => b).map((b, j) => <li key={j}>{b}</li>)}
+                    {iv.bullets.filter(b => b).map((b, j) => (
+                      <li
+                        key={j}
+                        contentEditable
+                        suppressContentEditableWarning
+                        onBlur={e => handleChange('involvement', 'bullets', e.target.innerText, i, j)}
+                      >{b}</li>
+                    ))}
                   </ul>
                 )}
               </div>
@@ -374,7 +517,12 @@ function ResumeBuilder() {
       {form.skills && (
         <div className="resume-section">
           <div className="resume-section-title">SKILLS</div>
-          <div className="resume-skills-table">
+          <div
+            className="resume-skills-table"
+            contentEditable
+            suppressContentEditableWarning
+            onBlur={e => handleChange('skills', null, e.target.innerText.replace(/\s+/g, ', '))}
+          >
             {form.skills.split(',').map(s => s.trim()).filter(Boolean).map((skill, i) => (
               <div className="resume-skill-cell" key={i}>{skill}</div>
             ))}
@@ -388,8 +536,16 @@ function ResumeBuilder() {
           {form.honors.map((h, i) => (
             (h.name || h.date) && (
               <div className="resume-row" key={i}>
-                <div className="resume-left">{h.name}</div>
-                <div className="resume-right">{h.date}</div>
+                <div className="resume-left"
+                  contentEditable
+                  suppressContentEditableWarning
+                  onBlur={e => handleChange('honors', 'name', e.target.innerText, i)}
+                >{h.name}</div>
+                <div className="resume-right"
+                  contentEditable
+                  suppressContentEditableWarning
+                  onBlur={e => handleChange('honors', 'date', e.target.innerText, i)}
+                >{h.date}</div>
               </div>
             )
           ))}
@@ -400,17 +556,14 @@ function ResumeBuilder() {
 
   return (
     <div className="builder-layout">
-      <div style={{ width: '100%' }}>
-        <button type="button" className="example-btn" onClick={fillExample} style={{marginBottom: '1rem'}}>Fill it</button>
-      </div>
       <form className="resume-form" onSubmit={e => e.preventDefault()}>
         <h2>Personal Info</h2>
         <div className="helper-text">Fill in your contact details as they should appear on your resume.</div>
-        <input placeholder="Full Name (e.g. Jane Doe)" value={form.personal.name} onChange={e => handleChange('personal', 'name', e.target.value)} />
-        <input placeholder="Email (e.g. jane.doe@email.com)" value={form.personal.email} onChange={e => handleChange('personal', 'email', e.target.value)} />
-        <input placeholder="Phone (e.g. +1 234 567 8901)" value={form.personal.phone} onChange={e => handleChange('personal', 'phone', e.target.value)} />
-        <input placeholder="LinkedIn (e.g. linkedin.com/in/janedoe)" value={form.personal.linkedin} onChange={e => handleChange('personal', 'linkedin', e.target.value)} />
-        <input placeholder="Portfolio (e.g. janedoe.dev)" value={form.personal.portfolio} onChange={e => handleChange('personal', 'portfolio', e.target.value)} />
+        <input placeholder="Full Name " value={form.personal.name} onChange={e => handleChange('personal', 'name', e.target.value)} />
+        <input placeholder="Email " value={form.personal.email} onChange={e => handleChange('personal', 'email', e.target.value)} />
+        <input placeholder="Phone " value={form.personal.phone} onChange={e => handleChange('personal', 'phone', e.target.value)} />
+        <input placeholder="LinkedIn (e.g. linkedin.com/in/athull-r)" value={form.personal.linkedin} onChange={e => handleChange('personal', 'linkedin', e.target.value)} />
+        <input placeholder="Portfolio " value={form.personal.portfolio} onChange={e => handleChange('personal', 'portfolio', e.target.value)} />
         <h2>Summary / Objective</h2>
         <div className="helper-text">Enter keywords (comma-separated) that describe your professional background, skills, and goals. Example: software engineer, 5+ years, React, scalable apps</div>
         <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem'}}>

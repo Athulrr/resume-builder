@@ -619,7 +619,7 @@ function ResumeBuilder() {
         {form.projects.map((pr, i) => (
           <div key={i} className="form-section">
             <input placeholder="Project Name" value={pr.name} onChange={e => handleChange('projects', 'name', e.target.value, i)} />
-            <input placeholder="Course (optional)" value={pr.course} onChange={e => handleChange('projects', 'course', e.target.value, i)} />
+            <input placeholder="Language" value={pr.course} onChange={e => handleChange('projects', 'course', e.target.value, i)} />
             <input placeholder="City" value={pr.city} onChange={e => handleChange('projects', 'city', e.target.value, i)} />
             <input placeholder="State" value={pr.state} onChange={e => handleChange('projects', 'state', e.target.value, i)} />
             <input placeholder="Start (Month Year)" value={pr.start} onChange={e => handleChange('projects', 'start', e.target.value, i)} />

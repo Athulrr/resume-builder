@@ -669,7 +669,7 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/builder" element={<ResumeBuilder />} />
-       <Route path="*" element={<Navigate to="/" replace />} />
+      
     </Routes>
   );
 }
